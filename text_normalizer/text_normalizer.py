@@ -1,12 +1,6 @@
 import logging
 import re
 
-
-class Rule:
-    def __init__(self):
-        self.logger = logging.getLogger('seo_terminal.' + __name__ + '.rule')
-
-
 # http://stackoverflow.com/a/13752628/6762004
 RE_EMOJI = re.compile('[\U00010000-\U0010ffff]', flags=re.UNICODE)
 
@@ -55,7 +49,7 @@ class TextNormalizer:
         """
         :param logger: logger for logging
         """
-        self.logger = logger or logging.getLogger('seo_terminal.' + __name__)
+        self.logger = logger or logging.getLogger(__name__)
 
         self._rules = [strip_emoji, remove_redundant_spaces, remove_spaces_before_puncts, lowercase, yo_to_e,
                        filter_symbols_only, filter_short]
