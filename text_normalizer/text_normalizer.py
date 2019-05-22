@@ -1,6 +1,9 @@
 import logging
 import re
 
+TEXTRU_LOWER_LIMIT = 100  # text should be from 100
+TEXTRU_UPPER_LIMIT = 150000  # to 150000 symbols
+
 # http://stackoverflow.com/a/13752628/6762004
 RE_EMOJI = re.compile('[\U00010000-\U0010ffff]', flags=re.UNICODE)
 
@@ -38,6 +41,10 @@ def filter_short(s: str) -> str:
 
 def filter_end_punctuation(s: str) -> str:
     return RE_END_PUNCTUATION.sub('', s)
+
+
+def filter_fit_limits(s: str) -> str:
+    return '' if len(s) < TEXTRU_LOWER_LIMIT or len(s) > TEXTRU_UPPER_LIMIT else s
 
 
 class TextNormalizer:
