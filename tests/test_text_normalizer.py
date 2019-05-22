@@ -1,6 +1,5 @@
 from text_normalizer.text_normalizer import TextNormalizer, strip_emoji, remove_redundant_spaces, \
-    remove_spaces_before_puncts, lowercase, yo_to_e, filter_symbols_only, filter_short, filter_end_punctuation, \
-    filter_fit_limits
+    remove_spaces_before_puncts, lowercase, yo_to_e, filter_symbols_only, filter_end_punctuation, filter_fit_limits
 
 
 class TestTextNormalizer:
@@ -40,11 +39,6 @@ class TestTextNormalizer:
     def test_filter_symbols_only(self):
         text = ',.!@312'
         norm = filter_symbols_only(text)
-        assert norm == ''
-
-    def test_filter_short(self):
-        text = '.'
-        norm = filter_short(text)
         assert norm == ''
 
     def test_filter_end_punctuation(self):

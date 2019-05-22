@@ -35,10 +35,6 @@ def filter_symbols_only(s: str) -> str:
     return s if any(char.isalpha() for char in s) else ''
 
 
-def filter_short(s: str) -> str:
-    return s if len(s) >= 2 else ''
-
-
 def filter_end_punctuation(s: str) -> str:
     return RE_END_PUNCTUATION.sub('', s)
 
@@ -59,7 +55,7 @@ class TextNormalizer:
         self.logger = logger or logging.getLogger(__name__)
 
         self._rules = [strip_emoji, remove_redundant_spaces, remove_spaces_before_puncts, lowercase, yo_to_e,
-                       filter_symbols_only, filter_short]
+                       filter_symbols_only, filter_fit_limits]
 
     def normalize(self, text: str) -> str:
         """
