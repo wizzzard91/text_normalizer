@@ -7,8 +7,8 @@ TEXTRU_UPPER_LIMIT = 150000  # to 150000 symbols
 # http://stackoverflow.com/a/13752628/6762004
 RE_EMOJI = re.compile('[\U00010000-\U0010ffff]', flags=re.UNICODE)
 
-RE_PUT_SPACES_AFTER_PUNCTS = re.compile(r'(?<=[.,]{1})(?=[^\s.,])')
-RE_SPACES_BEFORE_PUNCTS = re.compile(r'\s([?,.;:!"](?:\s|$))')
+RE_PUT_SPACES_AFTER_PUNCTS = re.compile(r'(?<=[,.;:!?]{1})(?=[^\s.,])')
+RE_SPACES_BEFORE_PUNCTS = re.compile(r'\s([,.;:!?"](?:\s|$))')
 RE_END_PUNCTUATION = re.compile(r'\s([ .,;:/]*$)')
 
 
