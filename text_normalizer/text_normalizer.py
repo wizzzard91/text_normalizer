@@ -7,6 +7,7 @@ TEXTRU_UPPER_LIMIT = 150000  # to 150000 symbols
 # http://stackoverflow.com/a/13752628/6762004
 RE_EMOJI = re.compile('[\U00010000-\U0010ffff]', flags=re.UNICODE)
 
+RE_PUT_SPACES_AFTER_PUNCTS = re.compile(r'(?<=[.,]{1})(?=[^\s.,])')
 RE_SPACES_BEFORE_PUNCTS = re.compile(r'\s([?,.;:!"](?:\s|$))')
 RE_END_PUNCTUATION = re.compile(r'\s([ .,;:/]*$)')
 
@@ -17,6 +18,10 @@ def strip_emoji(s: str) -> str:
 
 def remove_redundant_spaces(s: str) -> str:
     return ' '.join(s.split())  # works with both tabs and spaces
+
+
+def add_spaces_after_puncts(s: str) -> str:
+    return RE_PUT_SPACES_AFTER_PUNCTS.sub(r' ', s)
 
 
 def remove_spaces_before_puncts(s: str) -> str:
@@ -54,8 +59,8 @@ class TextNormalizer:
         """
         self.logger = logger or logging.getLogger(__name__)
 
-        self._rules = [strip_emoji, remove_redundant_spaces, remove_spaces_before_puncts, lowercase, yo_to_e,
-                       filter_symbols_only, filter_fit_limits]
+        self._rules = [strip_emoji, add_spaces_after_puncts, remove_redundant_spaces, remove_spaces_before_puncts,
+                       lowercase, yo_to_e, filter_symbols_only, filter_fit_limits]
 
     def normalize(self, text: str) -> str:
         """

@@ -1,5 +1,6 @@
 from text_normalizer.text_normalizer import TextNormalizer, strip_emoji, remove_redundant_spaces, \
-    remove_spaces_before_puncts, lowercase, yo_to_e, filter_symbols_only, filter_end_punctuation, filter_fit_limits
+    remove_spaces_before_puncts, lowercase, yo_to_e, filter_symbols_only, filter_end_punctuation, filter_fit_limits, \
+    add_spaces_after_puncts
 
 
 class TestTextNormalizer:
@@ -15,6 +16,11 @@ class TestTextNormalizer:
         text = '👍🔥👆🚀🛎👉🎁📣'
         norm = strip_emoji(text)
         assert norm == ''
+
+    def test_add_spaces_after_puncts(self):
+        text = 'This,is.a,text...This is, another text,it has no space after the comma. ott.com'
+        norm = add_spaces_after_puncts(text)
+        assert norm == 'This, is. a, text... This is, another text, it has no space after the comma. ott. com'
 
     def test_redundant_spaces(self):
         text = 'Hello     world! \t \t \n \n nice to meet you'
